@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   include ApplicationHelper
-  before_filter :signed_in, only: [:tweets]
+  before_filter :signed_in, only: [:tweets, :timeline]
 
   def index
   end
@@ -11,7 +11,7 @@ class SearchController < ApplicationController
       config.consumer_secret = Figaro.env.twitter_api_secret
     end
     @search_terms = params[:search_terms]
-    @tweets = client.search(params[:search_terms]).take(50)
+    @tweets = client.search(params[:search_terms]).take(100)
   end
 
   def timeline
@@ -20,7 +20,16 @@ class SearchController < ApplicationController
       config.consumer_secret = Figaro.env.twitter_api_secret
     end
     @twitter_user = params[:twitter_user]
-    @tweets = client.user_timeline(params[:twitter_user])
+    @tweets = client.user_timeline(@twitter_user, :count => "100")
+    @city = client.user(@twitter_user).location
+    @twitter_user_name = client.user(@twitter_user).name
+    @loc = []
+    @tweets.each do |tweet|
+      if tweet.geo.coordinates.present?
+        formatted_geo = "#{tweet.geo.coordinates[0]},#{tweet.geo.coordinates[1]}"
+        @loc.push(formatted_geo)
+      end
+    end
   end
 
 

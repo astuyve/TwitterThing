@@ -1,10 +1,21 @@
-<%= render 'form' %>
-<h2>Showing last 50 tweets from "<%= @twitter_user %>"</h2>
-<table>
-  <th>Tweet</th>
+<h2>Showing last 100 tweets from "<%=link_to @twitter_user, "https://twitter.com/#{@twitter_user}"%>"</h2>
+<br>
+<% if @city.present? %>
+  <h3><%= @twitter_user_name %> tweets from <%= @city %></h3>
+  <br>
+<% end %>
+<% if @loc.empty? and @city.present? %>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=300x300&maptype=hybrid&markers=#{@city}" %>
+<% elsif @loc.present? %>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=300x300&maptype=hybrid&markers=#{raw @loc.join("%7C")}" %>
+<% end %>
+
+
+<table class="table table-striped">
+  <th>Tweets</th>
   <% @tweets.each do |tweet| %>
   <tr>
-    <td><%= tweet.text %> </td>
+    <td><%= tweet.text %></td>
   </tr>
   <% end %>
 </table>
