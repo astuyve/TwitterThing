@@ -1,0 +1,10 @@
+<table>
+  <th>User</th>
+  <th>Tweet</th>
+  <% @tweets.each do |tweet| %>
+  <tr>
+    <td><%= tweet.user.screen_name %> </td>
+    <td><%= tweet.text %> </td>
+  </tr>
+  <% end %>
+</table>
