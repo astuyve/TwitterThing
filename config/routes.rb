@@ -2,6 +2,7 @@ TwitterThing::Application.routes.draw do
   root 'search#index'
 
   get '/search', to: 'search#tweets'
+  get '/timeline', to: 'search#timeline'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/signout', to: 'sessions#destroy'
 

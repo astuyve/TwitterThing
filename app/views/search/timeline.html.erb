@@ -1,0 +1,10 @@
+<%= render 'form' %>
+<h2>Showing last 50 tweets from "<%= @twitter_user %>"</h2>
+<table>
+  <th>Tweet</th>
+  <% @tweets.each do |tweet| %>
+  <tr>
+    <td><%= tweet.text %> </td>
+  </tr>
+  <% end %>
+</table>
