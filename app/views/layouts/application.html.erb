@@ -21,8 +21,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-text pull-left">
       <% if current_user %>
-        <li>Welcome <%= current_user.name%> <br></li>
-          <br>
+        <li>Welcome <%= current_user.name%></li>
         <li><%= link_to "Sign out", "/signout" , class: "btn btn-large btn-default" %></li>
       </ul>
         <%= render 'form' %>
