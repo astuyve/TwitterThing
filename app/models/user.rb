@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
@@ -7,7 +8,11 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["info"]["nickname"]
+      auth["info"].each do |attr, val|
+        if user.has_attribute?("#{attr}")
+          user.update_attribute("#{attr}", val)
+        end
+      end
     end
   end
 end

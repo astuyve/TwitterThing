@@ -1,13 +1,20 @@
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDaACEciennJ-aJomd_1VixyDoY-v1sjGE", :async=> true %>
+
 <h2>Showing last 100 tweets from "<%=link_to @twitter_user, "https://twitter.com/#{@twitter_user}"%>"</h2>
 <br>
-<% if @city.present? %>
-  <h3><%= @twitter_user_name %> tweets from <%= @city %></h3>
-  <br>
-<% end %>
 <% if @loc.empty? and @city.present? %>
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=300x300&maptype=hybrid&markers=#{@city}" %>
-<% elsif @loc.present? %>
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=300x300&maptype=hybrid&markers=#{raw @loc.join("%7C")}" %>
+  <h3><%= @twitter_user %> tweets from <%= @city %></h3>
+  <div id="map-canvas"></div>
+  <%= javascript_tag do %>
+    window.city = '<%= @city %>';
+  <% end %>
+  <br>
+<% elsif not @loc.empty? %>
+  <h3><%= @twitter_user %> tweets from <%= @city %></h3>
+  <div id="map-canvas"></div>
+  <%= javascript_tag do %>
+    window.locations_array = <%= raw @loc.to_json %>;
+  <% end %>
 <% end %>
 
 

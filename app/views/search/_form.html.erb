@@ -1,7 +1,11 @@
 <%= form_tag('/search', method: 'get', html: {class: "form", role: "form"}) do |f| %>
   <ul class="nav navbar-text pull-right">
-    <li><%= label_tag(:search_terms, "Search twitter for:") %>
+  <div class="form-group">
+    <li><%= label_tag(:search_terms, "Search twitter for:") %></li>
     <%= text_field_tag(:search_terms) %>
-    <%= submit_tag("Search", :class=>"btn btn-large btn-default") %></li>
+  </div>
+  <div class="actions">
+    <li><%= submit_tag("Search", :class=>"btn btn-large btn-default") %></li>
+  </div>
   </ul>
 <% end %>
