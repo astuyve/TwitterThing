@@ -21,12 +21,10 @@ class SearchController < ApplicationController
     end
     @twitter_user = params[:twitter_user]
     @tweets = client.user_timeline(@twitter_user, :count => "100")
-    @city = client.user(@twitter_user).location
-    @twitter_user_name = client.user(@twitter_user).name
     @loc = []
     @tweets.each do |tweet|
       if tweet.geo.coordinates.present?
-        formatted_geo = "#{tweet.geo.coordinates[0]},#{tweet.geo.coordinates[1]}"
+        formatted_geo = "#{tweet.geo.coordinates[0]},#{tweet.geo.coordinates[1]},#{tweet.text}"
         @loc.push(formatted_geo)
       end
     end
