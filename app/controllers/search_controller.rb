@@ -21,10 +21,7 @@ class SearchController < ApplicationController
     end
     @twitter_user = params[:twitter_user]
     @tweets = client.user_timeline(@twitter_user, :count => "100")
-<<<<<<< HEAD
     @city = client.user(@twitter_user).location
-=======
->>>>>>> bc8487dbe21dbb083bb5cb739bbe43ef5d7b7ebe
     @loc = []
     @tweets.each do |tweet|
       if tweet.geo.coordinates.present?
