@@ -1,5 +1,6 @@
 <% if current_user %>
   <h2>Search!</h2>
+  <%= current_user.followers_count %>
 <% else %>
   <h2>Please sign in with twitter to search!</h2>
 <% end %>

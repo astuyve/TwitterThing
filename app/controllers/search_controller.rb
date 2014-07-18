@@ -6,22 +6,14 @@ class SearchController < ApplicationController
   end
 
   def tweets
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key = Figaro.env.twitter_api_key
-      config.consumer_secret = Figaro.env.twitter_api_secret
-    end
     @search_terms = params[:search_terms]
-    @tweets = client.search(params[:search_terms]).take(100)
+    @tweets = $client.search(params[:search_terms]).take(100)
   end
 
   def timeline
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key = Figaro.env.twitter_api_key
-      config.consumer_secret = Figaro.env.twitter_api_secret
-    end
     @twitter_user = params[:twitter_user]
-    @tweets = client.user_timeline(@twitter_user, :count => "100")
-    @city = client.user(@twitter_user).location
+    @tweets = $client.user_timeline(@twitter_user, :count => "100")
+    @city = $client.user(@twitter_user).location
     @loc = []
     @tweets.each do |tweet|
       if tweet.geo.coordinates.present?
