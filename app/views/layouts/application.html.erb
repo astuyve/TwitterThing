@@ -22,6 +22,7 @@
       <ul class="nav navbar-text pull-left">
       <% if current_user %>
         <li>Welcome <%= current_user.name%> <br></li>
+        <li>Your current permissions are: <b><%=current_user.role %></b><br></li>
           <br>
         <li><%= link_to "Sign out", "/signout" , class: "btn btn-large btn-default" %></li>
       </ul>
