@@ -49,4 +49,5 @@ function loadScript() {
 
 $(document).ready(function () {
   loadScript();
+  initialize();
 });

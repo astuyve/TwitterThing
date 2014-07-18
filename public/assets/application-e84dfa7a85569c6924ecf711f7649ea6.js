@@ -13402,6 +13402,7 @@ function initialize() {
 
   var infowindow = new google.maps.InfoWindow();
   if (typeof locations_array != 'undefined') {
+    console.log(locations_array)
     for (coordinate in locations_array) {
       var coord=locations_array[coordinate].split(',')
       marker = new google.maps.Marker({
@@ -13420,6 +13421,7 @@ function initialize() {
     }
   }
   else if (city != 'null'){
+    console.log(city)
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': city }, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -13434,13 +13436,14 @@ function initialize() {
 function loadScript() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDaACEciennJ-aJomd_1VixyDoY-v1sjGE&' +
       'callback=initialize';
   document.body.appendChild(script);
 }
 
 $(document).ready(function () {
   loadScript();
+  initialize();
 });
 (function() {
 
